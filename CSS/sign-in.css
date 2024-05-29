@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    background-color: rgb(52, 30, 0);
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+main {
+    position: fixed;
+    background-color: white;
+    height: 70%;
+    width: 50%;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 4.5%;
+    /* margin-bottom: 50px; */
+}
+
+.heading {
+    display: flex;
+    border-bottom: 1px solid black;
+    justify-content: space-between;
+}
+
+h1 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+form {
+    padding: 20px;
+    height: 50%;
+    margin-top: 20px;
+}
+
+input, button {
+    padding: 10px;
+    width: 50%;
+    border: 1px solid orange;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+button {
+    width: 54%;
+    color: white;
+    background-color: orange;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.googleDiv {
+    padding: 20px;
+}
+
+.googleSignInBtn {
+    display: flex;
+    color: white;
+    background-color: blue;
+    border: none;
+    justify-content: center;
+    width: 54%;
+}
+
+.googleSignInBtn > i {
+    padding-right: 8px;
+}
+
+.googleSignInBtn > span {
+    padding-top: 3px;
+}
+
+.google-integration {
+    height: 50px;
+    margin-bottom: 20px;
+    border-top: 1px solid black;
+}

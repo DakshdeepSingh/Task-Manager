@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="CSS/sign-in.css">
+        <title>Sign In</title>
+    </head>
+    <body>
+        <main>
+            <div class="heading">
+                <h1>
+                    Task Manager
+                </h1>
+                <h1>
+                    Sign In
+                </h1>
+            </div>
+            <center>
+                <form onsubmit="submitForm(event)">
+                    <input type="text" id="username" placeholder="Username" required>
+                    <!-- <br><br> -->
+                    <input type="password" id="password" placeholder="Password" required>
+                    <!-- <br><br> -->
+                    <button id="signInBtn" type="submit" style="margin-bottom: 15px;">Sign In</button>
+                    <div>
+                        Don't have an account?
+                        <a href="sign-up.html">Sign Up</a>
+                    </div>
+                </form>
+            
+                <hr>
+                <div class="googleDiv">
+                    <button class="googleSignInBtn" id="googleSignInBtn">
+                        <i class="fa fa-google" style="font-size: 20px;"></i>
+                        <span>
+                            Sign In with Google
+                        </span>
+                    </button>
+                </div>
+            </center>
+        </main>
+    </body>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyBOG62aQFkI4kBrbBCeATNSmMrpI1DSRmA",
+            authDomain: "fir-8a57c.firebaseapp.com",
+            projectId: "fir-8a57c",
+            storageBucket: "fir-8a57c.appspot.com",
+            messagingSenderId: "492870828811",
+            appId: "1:492870828811:web:2f6d165678dc75d11fd80e",
+            measurementId: "G-28XFZHXZH9"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        auth.languageCode = 'en';
+        const provider = new GoogleAuthProvider();
+
+        const user = auth.currentUser;
+        
+        const googleLogin = document.getElementById('googleSignInBtn');
+        googleLogin.addEventListener("click", function() {
+            signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                const user = result.user;
+                console.log(user);
+                window.location.href = "main.html";
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+            });
+        })
+        function updateUserProfile(user) {
+            const userName = user.displayName;
+            const userEmail = user.displayemail;
+            const userProfilePic = user.photoURL;
+
+            document.getElementById('head').textContent = userName;
+            document.getElementById('userPic').src = userProfilePic;
+        }
+        updateUserProfile();
+    </script>
+    <script src="JS/sign-in.js"></script>
+</html>

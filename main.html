@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="png" sizes="16x16" href="Icon/todo.svg">
+        <link rel="stylesheet" href="CSS/main.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <title>Task Manager</title>
+    </head>
+    <body>
+        <header>
+            <div style="display: flex; width: 80px;">
+            </div>
+            <h1 class="text-color">
+                Task Manager
+            </h1>
+            <div class="search">
+                <div class="fullSreen">
+                    <div class="searchDiv">
+                        <input type="text" id="searchInput" placeholder="Search (Title)" class="searchBar">
+                        <button class="micButton" id="micButton">
+                            <span class="material-symbols-outlined">
+                                mic
+                            </span>
+                        </button>
+                        <button class="searchButton" onclick="performSearch()">
+                            <span class="material-symbols-outlined">
+                                search
+                            </span>
+                        </button>
+                    </div>
+                    <div class="color-palette-div">
+                        <button class="color-palette" onclick="togglePaletteDropdown()">
+                            <span class="material-symbols-outlined">
+                                palette
+                            </span>
+                        </button>
+                        <div class="palette-dropdown" id="paletteDropdown" style="display: none;">
+                            <!-- Light Mode Color Palette -->
+                            <div id="lightModePalette">
+                                <!-- <button onclick="changeBackgroundImage()" style="background-image: url('https://www.gstatic.com/mail/themes/featured/f50.jpg=w58-h40-e365-k-no-nd-dc'); margin-left: 0px;"></button> -->
+                                <button onclick="changeBackgroundColor('#B1D5EF')" style="background-color: #B1D5EF; margin-left: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#FF5C5C')" style="background-color: #FF5C5C;"></button>
+                                <button onclick="changeBackgroundColor('#CAB5ED')" style="background-color: #CAB5ED;"></button>
+                                <button onclick="changeBackgroundColor('#8EDCE0')" style="background-color: #8EDCE0;"></button>
+                                <br>
+                                <button onclick="changeBackgroundColor('#DCF0E4')" style="background-color: #DCF0E4; margin-left: 0px; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#F7DD6E')" style="background-color: #F7DD6E; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#949494')" style="background-color: #949494; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#F8EDCE')" style="background-color: #F8EDCE; margin-bottom: 0px;"></button>
+                            </div>
+                            <!-- Dark Mode Color Palette -->
+                            <div id="darkModePalette">
+                                <button onclick="changeBackgroundColor('#450f0f')" style="background-color: #450f0f; margin-left: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#000000')" style="background-color: #000000;"></button>
+                                <button onclick="changeBackgroundColor('#545454')" style="background-color: #545454;"></button>
+                                <button onclick="changeBackgroundColor('#363636')" style="background-color: #363636;"></button>
+                                <br>
+                                <button onclick="changeBackgroundColor('#090038')" style="background-color: #090038; margin-left: 0px; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#002A38')" style="background-color: #002A38; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#1E1F26')" style="background-color: #1E1F26; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#443358')" style="background-color: #443358; margin-bottom: 0px;"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="light-dark-mode">
+                        <button class="ld-mode-btn" onclick="switchDarkMode()" id="dmode">
+                            <span class="material-symbols-outlined">
+                                dark_mode
+                            </span>
+                        </button>
+                        <button class="ld-mode-btn" onclick="switchLightMode()" id="lmode">
+                            <span class="material-symbols-outlined">
+                                light_mode
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="light-dark-mode" id="menu-btn">
+                    <span class="material-symbols-outlined menu-icon" onclick="toggleMobileViewMenuDropdown()">
+                        menu
+                    </span>
+                    <div class="mobileView" id="mobileView">
+                        <div class="searchDiv">
+                            <input type="text" id="searchMobileInput" placeholder="Search (Title)" class="searchBar">
+                            <button class="micButton" id="micMobileButton">
+                                <span class="material-symbols-outlined">
+                                    mic
+                                </span>
+                            </button>
+                            <button class="searchButton" onclick="performMobileSearch()">
+                                <span class="material-symbols-outlined">
+                                    search
+                                </span>
+                            </button>
+                        </div>
+                        <div class="palette-dropdown" id="paletteDropdown">
+                            <!-- Light Mode Color Palette -->
+                            <div id="lmcPalette">
+                                <button onclick="changeBackgroundColor('#7F5CFF')" style="background-color: #7F5CFF; margin-left: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#FF5C5C')" style="background-color: #FF5C5C;"></button>
+                                <button onclick="changeBackgroundColor('#CD74FD')" style="background-color: #CD74FD;"></button>
+                                <button onclick="changeBackgroundColor('#4BFFEA')" style="background-color: #4BFFEA;"></button>
+                                <br>
+                                <button onclick="changeBackgroundColor('#4dffca')" style="background-color: #4dffca; margin-left: 0px; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#F3FF94')" style="background-color: #F3FF94; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#949494')" style="background-color: #949494; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#F8EDCE')" style="background-color: #F8EDCE; margin-bottom: 0px;"></button>
+                            </div>
+                            <!-- Dark Mode Color Palette -->
+                            <div id="dmcPalette">
+                                <button onclick="changeBackgroundColor('#7e1b1b')" style="background-color: #7e1b1b; margin-left: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#000000')" style="background-color: #000000;"></button>
+                                <button onclick="changeBackgroundColor('#545454')" style="background-color: #545454;"></button>
+                                <button onclick="changeBackgroundColor('#363636')" style="background-color: #363636;"></button>
+                                <br>
+                                <button onclick="changeBackgroundColor('#090038')" style="background-color: #090038; margin-left: 0px; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#002A38')" style="background-color: #002A38; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#1E1F26')" style="background-color: #1E1F26; margin-bottom: 0px;"></button>
+                                <button onclick="changeBackgroundColor('#443358')" style="background-color: #443358; margin-bottom: 0px;"></button>
+                            </div>
+                        </div>
+                        <div class="light-dark-mode">
+                            <button class="ld-mode-btn" onclick="switchMobileDarkMode()" id="dbtnmode">
+                                <span class="material-symbols-outlined">
+                                    dark_mode
+                                </span>
+                            </button>
+                            <button class="ld-mode-btn" onclick="switchMobileLightMode()" id="lbtnmode">
+                                <span class="material-symbols-outlined">
+                                    light_mode
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="light-dark-mode profile" style="background-color: white; height: 40px; width: 40px;" onclick="toggleUserMenuDropdown()">
+                        <img id="userPic" src="Icon/user.svg" class="ld-mode-btn" style="width: 100%; background-color: inherit;">
+                    </button>
+                    <div class="palette-dropdown user-menu" id="user-menu">
+                        <div>
+                            Hi, 
+                            <span id="user-name"></span>
+                        </div>
+                        <button id="sign-out" onclick="signOut()">Sign Out</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <nav>
+            <a href="main.html" class="nav-btn">
+                <div class="current">
+                    <span class="material-symbols-outlined nav-icon">
+                        home
+                    </span>
+                    <div class="nav-label">
+                        Home
+                    </div>
+                </div>
+            </a>
+            <a href="undone.html" class="nav-btn">
+                <div>
+                    <span class="material-symbols-outlined nav-icon">
+                        view_list
+                    </span>
+                    <div class="nav-label">
+                        Undone Tasks
+                    </div>
+                </div>
+            </a>
+            <a href="done.html" class="nav-btn">
+                <div>
+                    <span class="material-symbols-outlined nav-icon">
+                        task_alt
+                    </span>
+                    <div class="nav-label">
+                        Done Tasks
+                    </div>
+                </div>
+            </a>
+        </nav>
+        <main>
+            <div class="date-top">
+                <div id="clock">
+                    <h2 id="date-time"></h2>
+                </div>
+                <div class="sort-tasks">
+                    <label for="sort">Sort : </label>
+                    <select name="sort" id="sort" onchange="sortTasks()">
+                        <option value="none">None</option>
+                        <option value="date_asc">Date (Ascending)</option>
+                        <option value="date_des">Date (Descending)</option>
+                    </select>
+                </div>
+            </div>
+            <div id="task_container" class="task-container">
+            </div>
+        </main>
+        <button class="add-task" onclick="openForm()">
+            <span class="material-symbols-outlined" style="font-size: 30px;">
+                add
+            </span>
+        </button>
+        <!-- Add task page -->
+        <div class="add-task-popup" id="add-popup">
+            <div class="add-form">
+                <div class="task-form-main">
+                    <h1 class="form-heading">
+                        Add task
+                    </h1>
+                    <div class="form-body">
+                        <form id="add_task_form" onsubmit="submitForm(); return false;">
+                            <label for="title" class="margin-left-20">
+                                <b>Title:</b>
+                            </label>
+                            <input id="title-id" type="text" placeholder="Enter Title" name="title" class="input-area width-title-date title-width" required>
+                            <div class="form-break">
+                                <br><br>
+                            </div>
+                            <label for="duedate" class="margin-left-20">
+                                <b>Due Date:</b>
+                            </label>
+                            <input id="duedate-id" type="date" name="duedate" class="input-area width-title-date" required>
+                            <br><br>
+                            <label for="category" class="margin-left-20">
+                                <b>Category:</b>
+                            </label>
+                            <input id="category-id" type="text" placeholder="Enter Category" name="category" class="input-area margin-left-20 category-width" required>
+                            <br><br>
+                            <label for="description" class="margin-left-20">
+                                <b>Description:</b>
+                            </label>
+                            <textarea id="desc-id" placeholder="Write Description Here" name="description" class="input-area description-input description-width" required></textarea>
+                            <br><br>
+                            <button type="button" class="submit_task_btn submit-form-btn" onclick="clearForm()">Reset</button>
+                            <br><br>
+                            <button type="submit" class="submit_task_btn submit-form-btn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <button class="close-task-form" onclick="closeForm()">
+                    <span class="material-symbols-outlined">
+                        close
+                    </span>
+                </button>
+            </div>
+        </div>
+        <!-- Edit task page -->
+        <div class="edit-task-popup" id="edit-popup">
+            <div class="edit-form">
+                <div class="task-form-main">
+                    <h1 class="form-heading">
+                        Edit task
+                    </h1>
+                    <div class="form-body">
+                        <form id="edit_task_form" onsubmit="updateTask(); return false;">
+                            <input type="hidden" id="taskIndex" name="taskIndex"> <!-- Store the task index -->
+                            <label for="title" class="margin-left-20">
+                                <b>Title:</b>
+                            </label>
+                            <input type="text" placeholder="Enter Title" name="edit-title" class="input-area width-title-date title-width" required>
+                            <div class="form-break">
+                                <br><br>
+                            </div>
+                            <label for="duedate" class="margin-left-20">
+                                <b>Due Date:</b>
+                            </label>
+                            <input type="date" name="edit-duedate" class="input-area width-title-date" required>
+                            <br><br>
+                            <label for="category" class="margin-left-20">
+                                <b>Category:</b>
+                            </label>
+                            <input type="text" placeholder="Enter Category" name="edit-category" class="input-area margin-left-20 category-width" required>
+                            <br><br>
+                            <label for="description" class="margin-left-20">
+                                <b>Description:</b>
+                            </label>
+                            <textarea placeholder="Write Description Here" name="edit-description" class="input-area description-input description-width" required></textarea>
+                            <br><br>
+                            <button type="submit" class="submit_task_btn submit-form-btn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <button class="close-task-form" onclick="closeEditForm()">
+                    <span class="material-symbols-outlined">
+                        close
+                    </span>
+                </button>
+            </div>
+        </div>
+    </body>
+    <script>
+        window.onload = function() {
+            displayTasks();
+        };
+
+        // Retrieve the username from localStorage
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('user-name').textContent = username;
+        }
+
+        // Function to sign out
+        function signOut() {
+            if (username) {
+                localStorage.removeItem('username');
+                localStorage.removeItem('password');
+                alert('Signed Out');
+                window.location.href = 'sign-in.html';
+            }
+        }
+    </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        if (!username) {
+            const firebaseConfig = {
+                apiKey: "AIzaSyBOG62aQFkI4kBrbBCeATNSmMrpI1DSRmA",
+                authDomain: "fir-8a57c.firebaseapp.com",
+                projectId: "fir-8a57c",
+                storageBucket: "fir-8a57c.appspot.com",
+                messagingSenderId: "492870828811",
+                appId: "1:492870828811:web:2f6d165678dc75d11fd80e",
+                measurementId: "G-28XFZHXZH9"
+            };
+            
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            const auth = getAuth(app);
+
+            const user = auth.currentUser;
+            
+            function updateUserProfile(user) {
+                const userName = user.displayName;
+                const userEmail = user.displayemail;
+                const userProfilePic = user.photoURL;
+
+                document.getElementById('user-name').textContent = userName;
+                document.getElementById('userPic').src = userProfilePic;
+            }
+        
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // If user is signed in, call the updateUserProfile function
+                    updateUserProfile(user);
+                    const uid = user.uid;
+                    return uid;
+                }
+                else {
+                    // If user is not signed in, redirect to the registration page
+                    alert("Signed Out");
+                    window.location.href = "sign-in.html";
+                }
+            })
+            const logOut = document.querySelector('#sign-out');
+            logOut.addEventListener("click", () => {
+                signOut(auth).then(() => {
+                // Sign-out successful.
+                }).catch((error) => {
+                // An error happened.
+                });
+            })
+        }
+    </script>
+    <script src="JS/main.js"></script>
+    <script src="JS/search-bar.js"></script>
+    <script src="JS/date-time.js"></script>
+    <script src="JS/task-displayer.js"></script>
+    <script src="JS/edit-task.js"></script>
+</html>
